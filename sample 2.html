@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ /* Cart styles (example) */
+.cart {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.cart-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-count {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.cart-items {
+  /* Style for the list of cart items */
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.cart-item-name {
+  font-weight: bold;
+}
+
+.cart-item-price {
+  /* Style for the price */
+}
+
+.remove-button {
+  /* Style for the remove button */
+}
+
+/* Button styles (example) */
+.button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+/* Icon styles (example) */
+.icon {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.minus-icon {
+  color: red;
+}
+
+.plus-icon {
+  color: green;
+}
+</style>
+</head>
+<body>
+
+<div class="cart">
+  <div class="cart-content">
+    <span class="cart-count">0</span>
+  </div>
+  <div class="cart-items">
+    <div class="cart-item"></div>
+    <div class="cart-item"></div>
+    <div class="cart-item"></div>
+    <div class="cart-item"></div>
+    <div class="cart-item"></div>
+    <div class="cart-item"></div>
+    <div class="cart-item"></div>
+    <div class="cart-item"></div>
+    <div class="cart-item"></div>
+  </div> 
+</div>
+
+<div>
+  <button class="button" data-product="Apple" data-price="1.50">Add to Cart</button>
+  <button class="button" data-product="Banana" data-price="0.75">Add to Cart</button>
+  <button class="button" data-product="Orange" data-price="1.25">Add to Cart</button>
+</div>
+
+<script>
+const cartCount = document.querySelector('.cart-count');
+const cartItems = document.querySelector('.cart-items');
+const buttons = document.querySelectorAll('.button');
+
+const cart = {}; // Object to store products and quantities
+let total = 0; // Variable to store the total price
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const product = button.dataset.product;
+    const price = parseFloat(button.dataset.price); 
+
+    // 1. Update count and button display 
+    if (button.textContent === "Add to Cart") {
+      button.textContent = ''; // Clear "Add to Cart"
+
+      // Create elements for icons and count
+      const minusIcon = document.createElement('span');
+      minusIcon.classList.add('icon', 'minus-icon');
+      minusIcon.textContent = '-';
+
+      const countSpan = document.createElement('span');
+      countSpan.classList.add('cart-count');
+      countSpan.textContent = 0; // Initialize count to 0
+
+      const plusIcon = document.createElement('span');
+      plusIcon.classList.add('icon', 'plus-icon');
+      plusIcon.textContent = '+';
+
+      // Append elements to the button
+      button.appendChild(minusIcon);
+      button.appendChild(countSpan);
+      button.appendChild(plusIcon);
+
+      // Add event listeners to the icons (ONLY ONCE PER BUTTON)
+      minusIcon.addEventListener('click', () => {
+        if (cart[product] > 0) {
+          cart[product]--;
+          countSpan.textContent = cart[product];
+          updateCart();
+        }
+      });
+
+      plusIcon.addEventListener('click', () => {
+        cart[product]++;
+        countSpan.textContent = cart[product];
+        updateCart();
+      });
+            // Initialize the product in the cart
+            cart[product] = 0;
+    } else {
+      // Handle removal logic if needed (e.g., remove product from cart)
+      // ...
+    }
+
+    // Update the cart display
+    console.log(updateCart(product,price));
+  });
+});
+
+// Function to update the cart display
+function updateCart(product,price) {
+  let totalItems = 0;
+  cartItems.innerHTML = ''; // Clear existing items
+  total = 0;
+
+  for (const product in cart) {
+    totalItems += cart[product];
+    const item = document.createElement('div');
+    item.classList.add('cart-item');
+
+    const productName = document.createElement('span');
+    productName.classList.add('cart-item-name');
+    productName.textContent = product;
+
+    const productCount = document.createElement('span');
+    productCount.classList.add('cart-count');
+    productCount.textContent = cart[product];
+
+    const productPrice = document.createElement('span');
+    productPrice.classList.add('cart-item-price');
+    productPrice.textContent = '$' + (cart[product] * price).toFixed(2);
+
+    const removeButton = document.createElement('button');
+    removeButton.classList.add('remove-button');
+    removeButton.textContent = 'Remove';
+    removeButton.addEventListener('click', () => {
+      removeFromCart(product);
+    });
+
+    item.appendChild(productName);
+    item.appendChild(productCount);
+    item.appendChild(productPrice);
+    item.appendChild(removeButton);
+
+    cartItems.appendChild(item);
+
+    total += cart[product] * price;
+  }
+
+  cartCount.textContent = totalItems;
+
+  // Display the total price
+  // const totalPriceElement = document.getElementById('total-price');
+  // totalPriceElement.textContent = '$' + total.toFixed(2); 
+}
+
+// Function to remove an item from the cart
+function removeFromCart(product) {
+  delete cart[product];
+  updateCart();
+}
+</script>
+
+</body>
+</html>

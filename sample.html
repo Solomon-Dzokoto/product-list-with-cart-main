@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* ... previous CSS ... */
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.icon {
+  margin: 0 5px; /* Add spacing between icons and text */
+  cursor: pointer;
+  font-size: 20px; /* Adjust icon size as needed */
+}
+
+.cart {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-content {
+  display: flex;
+  align-items: center;
+}
+
+.cart-count {
+  margin-left: 10px;
+}
+
+.cart-items {
+  margin-top: 10px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.cart-item-name {
+  margin-left: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="cart">
+  <div class="cart-content">
+    <span class="cart-count">0</span>
+  </div>
+  <div class="cart-items"></div> 
+</div>
+
+<div>
+  <button class="button" data-product="Apple">Add to Cart</button>
+  <button class="button" data-product="Banana">Add to Cart</button>
+  <button class="button" data-product="Orange">Add to Cart</button>
+</div>
+
+<script>
+const cartCount = document.querySelector('.cart-count');
+const cartItems = document.querySelector('.cart-items');
+const buttons = document.querySelectorAll('.button');
+
+const cart = {}; // Object to store products and quantities
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const product = button.dataset.product;
+
+    // 1. Update count and button display
+    if (button.textContent === "Add to Cart") {
+      button.textContent = ''; // Clear "Add to Cart"
+
+      // Create elements for icons and count
+      const minusIcon = document.createElement('span');
+      minusIcon.classList.add('icon', 'minus-icon');
+      minusIcon.textContent = '-';
+
+      const countSpan = document.createElement('span');
+      countSpan.classList.add('cart-count');
+      countSpan.textContent = 0; // Initialize count to 0
+
+      const plusIcon = document.createElement('span');
+      plusIcon.classList.add('icon', 'plus-icon');
+      plusIcon.textContent = '+';
+
+      // Append elements to the button
+      button.appendChild(minusIcon);
+      button.appendChild(countSpan);
+      button.appendChild(plusIcon);
+
+      // Add event listeners to the icons (ONLY ONCE PER BUTTON)
+      minusIcon.addEventListener('click', () => {
+        if (cart[product] > 0) {
+          cart[product]--;
+          countSpan.textContent = cart[product];
+          updateCart();
+        }
+      });
+
+      plusIcon.addEventListener('click', () => {
+        cart[product]++;
+        countSpan.textContent = cart[product];
+        updateCart();
+      });
+
+      // Initialize the product in the cart
+      cart[product] = 0; // Set the initial count to 0
+    } else {
+      // Handle removal logic if needed (e.g., remove product from cart)
+      // ...
+    }
+
+    // 2. Update cart display
+    updateCart();
+  });
+});
+
+// Function to update the cart display
+function updateCart() {
+  let totalItems = 0;
+  cartItems.innerHTML = ''; // Clear existing items
+
+  for (const product in cart) {
+    totalItems += cart[product];
+    const item = document.createElement('div');
+    item.classList.add('cart-item');
+
+    // Create the span elements using createElement
+    const productName = document.createElement('span');
+    productName.classList.add('cart-item-name');
+    productName.textContent = product;
+
+    const productCount = document.createElement('span');
+    productCount.classList.add('cart-count');
+    productCount.textContent = cart[product];
+
+    // Append the span elements to the item div
+    item.appendChild(productName);
+    item.appendChild(productCount);
+
+    cartItems.appendChild(item);
+  }
+
+  cartCount.textContent = totalItems;
+}
+</script>
+
+</body>
+</html>

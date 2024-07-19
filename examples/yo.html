@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cart</title>
+   <style>
+    .products-container {
+    display: inline-block;
+    margin: 10px;
+}
+.thumbnails img {
+    width: 100px;
+    height: 100px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+.thumbnails img.selected {
+    border-color: red;
+}
+.button {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button img {
+    margin: 0 5px;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.cart-item img {
+    width: 50px;
+    height: 50px;
+}
+.cart-item .quantity {
+    margin-left: 10px;
+}
+.cart-item .remove {
+    margin-left: auto;
+    cursor: pointer;
+}
+.cart-total {
+    font-weight: bold;
+    margin-top: 20px;
+}
+   </style>
+</head>
+<body>
+
+    <div class="button-container">
+        <button data-category="Waffle">Waffle</button>
+        <button data-category="Crème Brûlée">Crème Brûlée</button>
+        <button data-category="Macaron">Macaron</button>
+        <button data-category="Tiramisu">Tiramisu</button>
+        <button data-category="Baklava">Baklava</button>
+        <button data-category="Pie">Pie</button>
+        <button data-category="Cake">Cake</button>
+        <button data-category="Brownie">Brownie</button>
+        <button data-category="Panna Cotta">Panna Cotta</button>
+    </div>
+
+    <div class="products-container">
+        </div>
+
+    <div class="cart-container">
+        <h2>Cart</h2>
+        <div class="cart-items">
+        </div>
+        <div class="cart-total">Total: $0.00</div>
+    </div>
+
+    <script src="yo.js"></script> </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Raise</title>
+    <style>
+        .hover-card {
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 100px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="hover-card">Hover Me</div>
+</body>
+</html>

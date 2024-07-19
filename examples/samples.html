@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        .image-container {
+            display: inline-block; /* Or flexbox for better layout control */
+            margin: 10px;
+        }
+        .image-container img {
+            border: 2px solid transparent; /* Initial transparent border */
+            transition: border-color 0.3s ease; /* Smooth transition for the border */
+            width: 100px; /* Adjust image size as needed */
+            height: 100px;
+        }
+        .image-container img.selected {
+            border-color: red; /* Red border for selected image */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="button-container">
+        <button data-category="category1">Category 1</button>
+        <button data-category="category2">Category 2</button>
+        <button data-category="category3">Category 3</button>
+        </div>
+
+    <div class="image-container">
+        <img src="image1.jpg" data-category="category1" alt="Image 1">
+    </div>
+    <div class="image-container">
+        <img src="image2.jpg" data-category="category2" alt="Image 2">
+    </div>
+    <div class="image-container">
+        <img src="image3.jpg" data-category="category3" alt="Image 3">
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.button-container button');
+        const images = document.querySelectorAll('.image-container img');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.dataset.category;
+
+                console.log(category)
+
+                // Reset borders of all images
+                images.forEach(image => {
+                    image.classList.remove('selected')
+                });
+
+                // Apply red border to matching images
+                images.forEach(image => {
+                    if (image.dataset.category === category) {
+                        image.classList.add('selected');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

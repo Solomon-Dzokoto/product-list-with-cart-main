@@ -37,14 +37,14 @@
 }
 
 .cart-item-price {
-  /* Style for the price */
+  color: #4CAF50;
 }
 
 .remove-button {
-  /* Style for the remove button */
+ color: #4CAF50;
 }
 
-/* Button styles (example) */
+
 .button {
   background-color: #4CAF50;
   color: white;
@@ -95,6 +95,15 @@
 </div>
 
 <script>
+ /* const buttons = document.querySelectorAll('.button');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const imageId = button.dataset.imageId; // Get image ID from data attribute
+    const image = document.getElementById(imageId); // Select the corresponding image
+    image.style.border = '3px solid red'; // Add red border to the image
+  });
+});*/
 const cartCount = document.querySelector('.cart-count');
 const cartItems = document.querySelector('.cart-items');
 const buttons = document.querySelectorAll('.button');

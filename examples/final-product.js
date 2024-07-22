@@ -7,15 +7,15 @@ const cartBox = document.getElementById("cart-box");
 
 // Sample product data (you'll get this from your API or local storage)
 const products = [
-  { id: 1, name: "Waffle with Berries", category: "Breakfast", priceCent: 550, image: "./assets/images/image-product-1-thumbnail.jpg" , quantity: 0 }, 
-  { id: 2, name: "Vanilla Bean Crème", category: "Desserts", priceCent: 700, image: "./assets/images/image-product-2-thumbnail.jpg", quantity: 0 },
-  { id: 3, name: "Macaron Mix of Five", category: "Desserts", priceCent: 800, image: "./assets/images/image-product-3-thumbnail.jpg", quantity: 0 },
-  { id: 4, name: "Classic Tiramisu", category: "Desserts", priceCent: 550, image: "./assets/images/image-product-4-thumbnail.jpg", quantity: 0 },
-  { id: 5, name: "Pistachio Baklava", category: "Desserts", priceCent: 400, image: "./assets/images/image-product-5-thumbnail.jpg", quantity: 0 },
-  { id: 6, name: "Lemon Meringue Pie", category: "Desserts", priceCent: 450, image: "./assets/images/image-product-6-thumbnail.jpg", quantity: 0 },
-  { id: 7, name: "Red Velvet Cake", category: "Desserts", priceCent: 550, image: "./assets/images/image-product-7-thumbnail.jpg", quantity: 0 },
-  { id: 8, name: "Salted Caramel Brownie", category: "Desserts", priceCent: 450, image: "./assets/images/image-product-8-thumbnail.jpg", quantity: 0 },
-  { id: 9, name: "Vanilla Panna Cotta", category: "Desserts", priceCent: 650, image: "./assets/images/image-product-9-thumbnail.jpg", quantity: 0 },
+  { id: 111, name: "Waffle with Berries", category: "Breakfast", priceCent: 550, image: "./assets/images/image-product-1-thumbnail.jpg" , quantity: 0 }, 
+  { id: 222, name: "Vanilla Bean Crème", category: "Desserts", priceCent: 700, image: "./assets/images/image-product-2-thumbnail.jpg", quantity: 0 },
+  { id: 333, name: "Macaron Mix of Five", category: "Desserts", priceCent: 800, image: "./assets/images/image-product-3-thumbnail.jpg", quantity: 0 },
+  { id: 444, name: "Classic Tiramisu", category: "Desserts", priceCent: 550, image: "./assets/images/image-product-4-thumbnail.jpg", quantity: 0 },
+  { id: 555, name: "Pistachio Baklava", category: "Desserts", priceCent: 400, image: "./assets/images/image-product-5-thumbnail.jpg", quantity: 0 },
+  { id: 666, name: "Lemon Meringue Pie", category: "Desserts", priceCent: 450, image: "./assets/images/image-product-6-thumbnail.jpg", quantity: 0 },
+  { id: 777, name: "Red Velvet Cake", category: "Desserts", priceCent: 550, image: "./assets/images/image-product-7-thumbnail.jpg", quantity: 0 },
+  { id: 888, name: "Salted Caramel Brownie", category: "Desserts", priceCent: 450, image: "./assets/images/image-product-8-thumbnail.jpg", quantity: 0 },
+  { id: 999, name: "Vanilla Panna Cotta", category: "Desserts", priceCent: 650, image: "./assets/images/image-product-9-thumbnail.jpg", quantity: 0 },
 ];
 
 

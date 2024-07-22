@@ -30,9 +30,14 @@ h1{
   margin-bottom: 10px;
 font-weight:700;
 }
+
 .thumbnails img{
   width: 230px;
   border-radius:10px;
+  border: 2px solid transparent ;
+}
+.thumbnails img.selected{
+border-color: var(--Red) ;
 }
 .thumbnails button img{
   width:20px;
@@ -63,16 +68,33 @@ main .main-container {
   align-items:center;
   cursor: pointer;
 }
+.fa-minus, .fa-plus{
+  color: var(--Rose-50);
+  border-radius: 100%;
+  background-color: transparent;
+  border: 1px solid white;
+  transition: all 0.5s ease;
+}
+.fa-minus:hover{
+  background-color: #fff;
+  color:var(--Red);
+}
+.fa-plus:hover{
+  background-color: #fff;
+  color:var(--Red);
+}
+
 button:hover{
  color:var(--Red);
 }
-.thumbnails button img .minus{
- border: 1px solid white;
- border-radius: 10px;
+.display-quantity{
+  color: #fff;
 }
+
 span{
   font-size:14px;
   color:var(--Rose-300);
+  
 }
 small{
   color:var(--Red)
@@ -93,13 +115,19 @@ small{
 h4{
   color:var(--Red);
 }
+
 .cart-container small{
-  color:black;
-  margin-left: 25px;
+color: black;
+text-align: center;
+}
+.cart-appearance{
+  display: grid;
+  gap: 1rem;
 }
 .cart-container img{
 width:50%;
 margin-left: 50px;
+display: inline-block
 }
 .cart-items{
   display:flex;

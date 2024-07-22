@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <!-- font awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,39 +19,39 @@
     <div class="left-container">
       <h1> Desserts</h1>
       <div class="main-container js-main-container">
-          <div class="products-container">
-            <div class="thumbnails">
-              <img id="image1" src="./assets/images/image-waffle-desktop.jpg" alt="">
-             <button class="button" data-product-image="image1"
-             data-product-name="product-name">
-              <img src="./assets/images/icon-decrement-quantity.svg" alt="minus" >
-              <img src="./assets/images/icon-add-to-cart.svg" alt="">Add to Cart
-              <img class="plus" src="./assets/images/icon-increment-quantity.svg" alt="plus">
-            </button>
-            </div>
-            <span> Waffle</span>
-            <p class="food-name">Waffle  with Berries</p>
-            <small  class="price">$6.50</small>
+        <div id="111" class="products-container">
+          <div class="thumbnails" id="image1">
+            <img class="img"  src="./assets/images/image-waffle-desktop.jpg" alt="">
+            <button class="button js-add-to-cart" data-product-image="image1"
+            data-product-name="product-name">
+            <img src="./assets/images/icon-decrement-quantity.svg" alt="minus" >
+            <img src="./assets/images/icon-add-to-cart.svg" alt="">Add to Cart
+            <img class="plus" src="./assets/images/icon-increment-quantity.svg" alt="plus">
+           </button>
           </div>
-          <div class="products-container">
-            <div class="thumbnails">
-              <img id="image2" src="./assets/images/image-creme-brulee-desktop.jpg" alt="">
-             <button class="button" data-product-image="image2" 
-             data-product-name="product-name">
-              <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
-              <img src="./assets/images/icon-add-to-cart.svg" alt="">
-              Add to Cart
-              <img class="plus" src="./assets/images/icon-increment-quantity.svg" alt="plus">
-             </button>
-            </div>
-            <span>  Crème Brûlée</span>
-            <p class="food-name"> Vanilla Bean Crème Brûlée</p>
-            <small class="price">$7.00</small>
+          <span> Waffle</span>
+          <p class="food-name">Waffle  with Berries</p>
+          <small  class="price">$6.50</small>
+        </div>
+        <div id="222" class="products-container">
+          <div class="thumbnails" id="image2">
+            <img class="img"   src="./assets/images/image-creme-brulee-desktop.jpg" alt="">
+           <button class="button js-add-to-cart" data-product-image="image2" 
+           data-product-name="product-name">
+            <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
+            <img src="./assets/images/icon-add-to-cart.svg" alt="">
+            Add to Cart
+            <img class="plus" src="./assets/images/icon-increment-quantity.svg" alt="plus">
+           </button>
           </div>
-          <div class="products-container">
-            <div class="thumbnails">
-              <img id="image3" src="./assets/images/image-macaron-desktop.jpg" alt="">
-             <button class="button" data-product-image="image3" data-product-name="product-name">
+          <span>  Crème Brûlée</span>
+          <p class="food-name"> Vanilla Bean Crème Brûlée</p>
+          <small class="price">$7.00</small>
+        </div>
+          <div id="333" class="products-container">
+            <div class="thumbnails" id="image3">
+              <img class="img"  src="./assets/images/image-macaron-desktop.jpg" alt="">
+             <button class="button js-add-to-cart" data-product-image="image3" data-product-name="product-name">
               <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
               <img  src="./assets/images/icon-add-to-cart.svg" alt="">Add to Cart
               <img class="plus" src="./assets/images/icon-increment-quantity.svg" alt="plus">
@@ -59,10 +61,10 @@
             <p class="food-name">Macaron  Mix of Five</p>
             <small class="price">$8.00</small>
           </div>
-          <div class="products-container">
-            <div class="thumbnails">
-                  <img id="image4" src="./assets/images/image-tiramisu-desktop.jpg" alt="">
-                <button class="button" data-product-image="image4" data-product-name="product-name">
+          <div id="444" class="products-container">
+            <div id="image4" class="thumbnails">
+                  <img class="img"  src="./assets/images/image-tiramisu-desktop.jpg" alt="">
+                <button class="button js-add-to-cart" data-product-image="image4" data-product-name="product-name">
                   <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
                   <img src="./assets/images/icon-add-to-cart.svg" alt="">
                   Add to Cart
@@ -73,10 +75,10 @@
                 <p class="food-name">Classic Tiramisu</p>
                 <small class="price">$5.50</small>
               </div>
-              <div class="products-container">
-                <div class="thumbnails">
-                  <img id="image5" src="./assets/images/image-baklava-desktop.jpg" alt="">
-                <button class="button" data-product-image="image5"
+          <div id="555" class="products-container">
+                <div id="image5" class="thumbnails">
+                  <img class="img"  src="./assets/images/image-baklava-desktop.jpg" alt="">
+                <button class="button js-add-to-cart" data-product-image="image5"
                 data-product-name="product-name">
                   <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
                   <img src="./assets/images/icon-add-to-cart.svg" alt="">
@@ -87,11 +89,11 @@
                 <span>Baklava</span>
                 <p class="food-name">Pistachio Baklava</p>
                 <small class="price">$4.00</small>
-              </div>
-              <div class="products-container">
-                <div class="thumbnails">
-                  <img id="image6" src="./assets/images/image-meringue-desktop.jpg" alt="">
-                <button class="button" data-product-image="image6"
+            </div>
+          <div id="666" class="products-container">
+                <div id="image6" class="thumbnails">
+                  <img class="img"  src="./assets/images/image-meringue-desktop.jpg" alt="">
+                <button class="button js-add-to-cart" data-product-image="image6"
                 data-product-name="product-name">
                   <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
                   <img src="./assets/images/icon-add-to-cart.svg" alt="">Add to Cart
@@ -101,10 +103,10 @@
                 <p class="food-name">Lemon Meringue Pie</p>
                 <small class="price">$5.00</small>
               </div>
-          <div class="products-container">
-            <div class="thumbnails">
-              <img id="image7" src="./assets/images/image-cake-desktop.jpg" alt="">
-             <button class="button" data-product-image="image7"
+          <div id="777" class="products-container">
+            <div id="image7" class="thumbnails">
+              <img class="img"  src="./assets/images/image-cake-desktop.jpg" alt="">
+             <button class="button js-add-to-cart" data-product-image="image7"
              data-product-name="product-name">
               <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
               <img src="./assets/images/icon-add-to-cart.svg" alt="">Add to Cart
@@ -115,10 +117,10 @@
             <p class="food-name"> Red Velvet Cake</p>
             <small class="price">$4.50</small>
           </div>
-          <div class="products-container">
-            <div class="thumbnails">
-              <img id="image8" src="./assets/images/image-brownie-desktop.jpg" alt="">
-             <button class="button" data-product-image="image8"
+          <div id="888" class="products-container">
+            <div id="image8"  class="thumbnails">
+              <img class="img"  src="./assets/images/image-brownie-desktop.jpg" alt="">
+             <button class="button js-add-to-cart" data-product-image="image8"
              data-product-name="product-name">
               <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
               <img src="./assets/images/icon-add-to-cart.svg" alt="">Add to Cart
@@ -129,10 +131,10 @@
             <p class="food-name">Salted Caramel Brownie</p>
             <small class="price">$5.50</small>
           </div>
-          <div class="products-container">
-            <div class="thumbnails">
-              <img id="image9" src="./assets/images/image-panna-cotta-desktop.jpg" alt="">
-             <button class="button" data-product-image="image9"
+          <div id="999" class="products-container">
+            <div id="image9" class="thumbnails">
+              <img class="img"  src="./assets/images/image-panna-cotta-desktop.jpg" alt="">
+             <button class="button js-add-to-cart" data-product-image="image9"
              data-product-name="product-name">
               <img class="minus" src="./assets/images/icon-decrement-quantity.svg" alt="minus">
               <img src="./assets/images/icon-add-to-cart.svg" alt="">Add to Cart
@@ -147,10 +149,15 @@
     </div>
     <div class="right-container">
       <div class="cart-container">
-        <h4>Your Cart ( <span class="cart-number js-card-number" style="color:hsl(14, 86%, 42%)"></span> )</h4>
-        <img src="./assets/images/illustration-empty-cart.svg" alt="empty cart">
+        <h4>Your Cart ( <span class="cart-number js-card-number" style="color:#c73a0f"></span> )</h4>
+        <div class="cart-appearance">
+          <img src="./assets/images/illustration-empty-cart.svg" alt="empty cart">
+          <small>
+            Your added items will appear here
+          </small>
+        </div>
         <div id="cart-items-container" class="cart-box">
-          <div class="cart-items">
+          <div class="cart-item">
             <div class="first-portion">
               <p  class="food-name">Waffle  with Berries</p>
               <div class="under-portion">
@@ -159,7 +166,7 @@
             </div>
              <img src="./assets/images/icon-remove-item.svg" alt="">
           </div>
-          <div class="cart-items">
+          <div class="cart-item">
             <div class="first-portion">
               <p  class="food-name">Vanilla Bean Crème</p>
               <div class="under-portion">
@@ -241,18 +248,12 @@
           </div>
           <button class="btn" id="confirm-order">confirm Order</button>
         </div>
-        <small>
-          Your added items will appear here
-        </small>
+        
       </div>
       </div>
     </div>
   </main>
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
- 
-  <script src="scripts.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

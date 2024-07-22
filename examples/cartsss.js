@@ -68,6 +68,4 @@ confirmOrderButton.addEventListener('click', () => {
       orderDetails += ${product.name}: ${product.quantity}x - $${(product.quantity * product.priceCent / 100).toFixed(2)}n;
     }
   });
-  alert("Your Order:n" + orderDetails + "nTotal: $" + totalPriceElement.textContent);
-  // Here, you'd normally send the order data to your server for processing
 });

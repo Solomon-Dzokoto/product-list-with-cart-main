@@ -150,110 +150,66 @@
     <div class="right-container">
       <div class="cart-container">
         <h4>Your Cart ( <span class="cart-number js-card-number" style="color:#c73a0f"></span> )</h4>
-        <div class="cart-appearance">
-          <img src="./assets/images/illustration-empty-cart.svg" alt="empty cart">
-          <small>
-            Your added items will appear here
-          </small>
-        </div>
         <div id="cart-items-container" class="cart-box">
-          <div class="cart-item">
-            <div class="first-portion">
-              <p  class="food-name">Waffle  with Berries</p>
-              <div class="under-portion">
-                <div><span class="quantity">1x &nbsp</span> <span class="price"> &nbsp @$5.50</span> <span class=quantity-total>&nbsp&nbsp$5.50</span></div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
+          <div class="cart-appearance">
+            <img src="./assets/images/illustration-empty-cart.svg" alt="empty cart">
+            <small>
+              Your added items will appear here
+            </small>
           </div>
-          <div class="cart-item">
-            <div class="first-portion">
-              <p  class="food-name">Vanilla Bean Crème</p>
-              <div class="under-portion">
-                <div><span class="quantity">1x&nbsp&nbsp</span> <span class="price">&nbsp&nbsp @$7.00</span> <span class=quantity-total>&nbsp&nbsp$7.00</span></div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
-          </div>
-          <div class="cart-items">
-            <div class="first-portion">
-              <p  class="food-name">Macaron Mix of Five</p>
-              <div class="under-portion">
-                <div><span class="quantity">1x &nbsp&nbsp</span> <span class="price">&nbsp&nbsp @$8.00</span> <span class=quantity-total>&nbsp&nbsp $8.00</span></div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
-          </div>
-          <div class="cart-items">
-            <div class="first-portion">
-              <p  class="food-name">Classic Tiramisu</p>
-              <div class="under-portion">
-                <div>
-                  <span class="quantity">1x &nbsp</span> <span class="price"> &nbsp @$5.50</span> <span class=quantity-total>&nbsp&nbsp$5.50</span>
-                </div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
-          </div>
-          <div class="cart-items">
-            <div class="first-portion">
-              <p  class="food-name">Pistachio Baklava</p>
-              <div class="under-portion">
-                <div><span class="quantity">1x&nbsp&nbsp</span> <span class="price">&nbsp&nbsp @$4.00</span> <span class=quantity-total>&nbsp&nbsp$4.00</span></div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
-          </div>
-          <div class="cart-items">
-            <div class="first-portion">
-              <p  class="food-name">Lemon Meringue Pie</p>
-              <div class="under-portion">
-                <div><span class="quantity">1x &nbsp&nbsp</span> <span class="price">&nbsp&nbsp @$4.50</span> <span class=quantity-total>&nbsp&nbsp $4.50</span></div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
-          </div>
-          <div class="cart-items">
-            <div class="first-portion">
-              <p  class="food-name">Red Velvet Cake</p>
-              <div class="under-portion">
-                <div><span class="quantity">1x &nbsp</span> <span class="price"> &nbsp @$5.50</span> <span class=quantity-total>&nbsp&nbsp$5.50</span></div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
-          </div>
-          <div class="cart-items">
-            <div class="first-portion">
-              <p  class="food-name">Salted Caramel Brownie</p>
-              <div class="under-portion">
-                <div><span class="quantity">1x&nbsp&nbsp</span> <span class="price">&nbsp&nbsp @$4.50</span> <span class=quantity-total>&nbsp&nbsp$4.50</span></div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
-          </div>
-          <div class="cart-items">
-            <div class="first-portion">
-              <p  class="food-name">Vanilla Panna Cotta</p>
-              <div class="under-portion">
-                <div><span class="quantity">1x &nbsp&nbsp</span> <span class="price">&nbsp&nbsp @$6.50</span> <span class=quantity-total>&nbsp&nbsp $6.50</span></div>
-              </div>
-            </div>
-             <img src="./assets/images/icon-remove-item.svg" alt="">
-          </div>
-          <div class="total-price">
-           <p>Order Total</p><div id="total-price" >$46.50</div>
+        </div>
+        <div class="more-info">
+          <div class="order-total">
+            <p>Order Total</p><div id="totalPrice" >$0</div>
           </div>
           <div class="short-notice">
             <img src="../assets/images/icon-carbon-neutral.svg" alt="neutral">This is a carbon -neutral delivery
           </div>
-          <button class="btn" id="confirm-order">confirm Order</button>
+          <button class="btn" id="confirm-order">
+            confirm Order
+          </button>
+         </div>
+         
         </div>
         
       </div>
       </div>
     </div>
+    <dialog class="pop_up" id="popup">  
+      <div class="dialog-details">
+        <div class="top">
+          <div class="mark">
+            <i class="fa-duotone fa-solid fa-check fa-2xs"></i>
+          </div>
+          <h1>Order Confirmed</h1>
+          <small>We hope you enjoy your food</small>
+        </div>
+        <div class="middle">
+          <div class="cart-info">
+            <div class="pic">
+            <img src="assets/images/image-creme-brulee-thumbnail.jpg" alt="">
+            <div class="first-portion">
+              <p  class="food-name">Vanilla Bean Crème</p>             
+                <div class="under-portion">
+                  <span class="quantity">1x&nbsp&nbsp</span> <span class="price">&nbsp&nbsp @$7.00</span> 
+              </div>
+            </div>
+          </div>
+            <span class=quantity-total>&nbsp&nbsp$7.00</span>
+         </div>
+        </div>
+        <div class="bottom">
+          <div class="order-total">
+            <p>Order Total</p><div id="totalPrice" >$0</div>
+          </div>
+          <button class="btn" id="new-order">
+            Start New Order
+          </button>
+        </div>
+      </div>
+    </dialog>
+
   </main>
-  <script src="cart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

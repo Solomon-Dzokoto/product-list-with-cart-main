@@ -58,42 +58,17 @@ const products = [
        image: "./assets/images/image-panna-cotta-desktop.jpg",
         quantity: 0 },
 ];
-
-// Cart array to hold added items
-let cart = [];
-
-// Function to update the cart display
-function addCartToHTML() {
-  const cartItems = document.getElementById('cart-items-container'); 
-  cartItems.innerHTML = ''; 
-  if (cart.length > 0) {
-    cart.forEach(cartItem => {
-      let newCart = document.createElement('div');
-      newCart.classList.add('cartItem');
-      newCart.innerHTML = 
-      `
-        <div class="cart-item" data-product-id="${cartItem.id}"> 
-          <p class="food-name">${cartItem.name}</p>
-          <span class="price">@$${(cartItem.priceCent / 100).toFixed(2)}</span>
-          <span class="quantity">${cartItem.quantity}</span>
-          <span class="price-total">(${(cartItem.quantity * (cartItem.priceCent / 100)).toFixed(2)})</span>
-          <i class="fa-solid fa-xmark" style="color: #826830;" data-product-id="${cartItem.id}"></i> 
-        </div>
-      `;
-      cartItems.appendChild(newCart);
-    });
-  }
-}
+ // ... (your product array 'products' is already defined)
 
 let productsHTML = '';
 
 products.forEach((product) => {
   productsHTML += 
-   `
-    <div id="${product.id}" class="products-container">
-            <div class="thumbnails">
+                `
+             <div id="${product.id}" class="products-container">
+             <div class="thumbnails">
               <img class="img" id="image1" src=${product.image} alt="">
-             <button class="button js-add-to-cart" data-product-id="${product.id}">
+             <button class="button js-add-to-cart" data-product-id="${product.id}" >
               <i class="fa-solid fa-minus js-minus-button" data-product-id="${product.id}"></i>
               <div class="cart-image">
               <img src="./assets/images/icon-add-to-cart.svg" alt="">
@@ -109,95 +84,114 @@ products.forEach((product) => {
             <p class="food-name">${product.name}</p>
             <small  class="price">$${(product.priceCent/100).toFixed(2)}</small>
           </div>
-   `
+  `
 });
 document.querySelector('.js-main-container').innerHTML = productsHTML;
-
 
 const buttons = document.querySelectorAll('.js-add-to-cart');
 const minusButtons = document.querySelectorAll('.js-minus-button');
 const plusButtons = document.querySelectorAll('.js-plus-button');
 const quantityDisplays = document.querySelectorAll('.display-quantity'); 
+let displayQuantity = document.querySelector('.display-quantity');
+
+// Initialize the cart as an empty array
+let cart = [];
+
+function calculateCartTotal() {
+  let totalPrice = 0;
+  cart.forEach(item => {
+    totalPrice += (item.priceCent / 100) * item.quantity; // Calculate total based on quantity
+  });
+  return totalPrice;
+}
+
+function updateTotalPrice() {
+  const totalPrice = calculateCartTotal();
+  // Assuming you have an element with id "totalPrice" to display the total
+  document.getElementById('totalPrice').textContent = "$" + totalPrice.toFixed(2); 
+}
 
 // Handle Add to Cart Click
-buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const productContainer = button.parentNode;
-    const imageElement = productContainer.querySelector('.img');
-    imageElement.style.border = "2px solid #c73a0f";
-    button.style.color = "white";
-    button.style.backgroundColor = "#c73a0f";
-    button.style.width = "65%";
-    button.style.display = "flex";
-    button.style.gap = "3rem";
+buttons.forEach((button) => {  button.addEventListener('click', () => {
+  const productContainer = button.parentNode;
+  const imageElement = productContainer.querySelector('.img');
+  imageElement.style.border = "2px solid #c73a0f";
+  button.style.color = "white";
+  button.style.backgroundColor = "#c73a0f";
+  button.style.width = "65%";
+  button.style.display = "flex";
+  button.style.gap = "3rem";
 
-    const productId = parseInt(button.dataset.productId); 
-    const quantityDisplay = button.querySelector('.display-quantity'); 
-    let productIndex = cart.findIndex(item => item.id === productId);
+  const productId = parseInt(button.dataset.productId);
+  const productIndex = products.findIndex(product => product.id === productId);
+  const product = products[productIndex];
 
-    if (productIndex === -1) { // Product is not in the cart
-      // Find product in the products array
-      const product = products.find(item => item.id === productId);
-      // Add product to the cart array
-      cart.push({ ...product, quantity: 1 });
-    } else { // Product is already in the cart
-      // Increase the quantity
-      cart[productIndex].quantity++;
-    }
+  // Update the quantity of the product in the products array
+  product.quantity++;
 
-    // Update the quantity display
-    quantityDisplay.textContent = cart[productIndex].quantity;
+  // Check if the item is already in the cart, if not, add it
+  const isItemInCart = cart.some(item => item.id === productId);
+  if (!isItemInCart) {
+    cart.push(product);
+  }
 
-    // Update the cart display (call the function to update the HTML)
-    addCartToHTML();
-  });
+  // Update the display quantity for the product
+  const quantityDisplay = productContainer.querySelector('.display-quantity');
+  quantityDisplay.textContent = product.quantity;
+
+  // Update the total price
+  updateTotalPrice();
+});
 });
 
 // Handle Minus Button Click
-minusButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const productId = parseInt(button.dataset.productId);
-    const quantityDisplay = button.parentNode.querySelector('.display-quantity');
+minusButtons.forEach(button => {
+button.addEventListener('click', () => {
+  const productId = parseInt(button.dataset.productId);
+  const productIndex = products.findIndex(product => product.id === productId);
+  const product = products[productIndex];
 
-    // Find the product in the cart
-    let productIndex = cart.findIndex(item => item.id === productId);
+  if (product.quantity > 0) {
+    product.quantity--;
 
-    if (productIndex !== -1) { // Product is in the cart
-      if (cart[productIndex].quantity > 1) {
-        // Decrease the quantity
-        cart[productIndex].quantity--;
-      } else {
-        // Remove the product from the cart
-        cart.splice(productIndex, 1);
+    // Update display quantity
+    const quantityDisplay = productContainer.querySelector('.display-quantity');
+    quantityDisplay.textContent = product.quantity;
+
+    // Update the cart if the quantity is 0
+    if (product.quantity === 0) {
+      const cartIndex = cart.findIndex(item => item.id === productId);
+      if (cartIndex !== -1) {
+        cart.splice(cartIndex, 1); // Remove from cart if quantity is 0
       }
-
-      // Update the quantity display
-      quantityDisplay.textContent = cart[productIndex] ? cart[productIndex].quantity : 0;
-
-      // Update the cart display
-      addCartToHTML();
     }
-  });
+
+    // Update the total price
+    updateTotalPrice();
+  }
+});
 });
 
 // Handle Plus Button Click
-plusButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const productId = parseInt(button.dataset.productId);
-    const quantityDisplay = button.parentNode.querySelector('.display-quantity');
+plusButtons.forEach(button => {
+button.addEventListener('click', () => {
+  const productId = parseInt(button.dataset.productId);
+  const productIndex = products.findIndex(product => product.id === productId);
+  const product = products[productIndex];
 
-    // Find the product in the cart
-    let productIndex = cart.findIndex(item => item.id === productId);
+  product.quantity++;
 
-    if (productIndex !== -1) { // Product is in the cart
-      // Increase the quantity
-      cart[productIndex].quantity++;
+  // Update display quantity
+  const quantityDisplay = productContainer.querySelector('.display-quantity');
+  quantityDisplay.textContent = product.quantity;
 
-      // Update the quantity display
-      quantityDisplay.textContent = cart[productIndex].quantity;
+  // Update the cart if the quantity is 0
+  const cartIndex = cart.findIndex(item => item.id === productId);
+  if (cartIndex === -1) {
+    cart.push(product); // Add to cart if not already present
+  }
 
-      // Update the cart display
-      addCartToHTML();
-    }
-  });
+  // Update the total price
+  updateTotalPrice(); 
+});
 });

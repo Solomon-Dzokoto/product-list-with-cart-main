@@ -67,9 +67,9 @@ products.forEach((product) => {
   productsHTML += 
                 `
              <div id="${product.id}" class="products-container">
-            <div class="thumbnails">
+             <div class="thumbnails">
               <img class="img" id="image1" src=${product.image} alt="">
-             <button class="button js-add-to-cart" data-product-id="${product.id}">
+             <button class="button js-add-to-cart" data-product-id="${product.id}" >
               <i class="fa-solid fa-minus js-minus-button" data-product-id="${product.id}"></i>
               <div class="cart-image">
               <img src="./assets/images/icon-add-to-cart.svg" alt="">
@@ -96,6 +96,9 @@ const plusButtons = document.querySelectorAll('.js-plus-button');
 const quantityDisplays = document.querySelectorAll('.display-quantity'); 
 let displayQuantity=document.querySelector('.display-quantity');
 
+
+const cart=[];
+
 // Handle Add to Cart Click
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -108,9 +111,9 @@ buttons.forEach((button) => {
     button.style.display="flex";
     button.style.gap="3rem";
         // Check if the item is already in the cart
-        const isItemInCart = cart.some(item => item.id === parseInt(button.dataset.productId));
+       const isItemInCart = cart.some(item => item.id === parseInt(button.dataset.productId));
 
-        if (!isItemInCart) { // Only add if not already in the cart
+      if (!isItemInCart) { // Only add if not already in the cart
           updateCart(button.dataset.productId, 1); // Increase quantity by 1
           updateCartQuantityDisplay(button.dataset.productId);
         }     
@@ -121,6 +124,14 @@ buttons.forEach((button) => {
      const image=cartImage.querySelector('.cart-image');
      image.style.display="none";
 
+     const moreInfo=document.querySelector('.more-info');
+     moreInfo.style.display='block';
+     
+     updateTotalPrice();
+     updateCartDisplay();
+     calculateCartTotal();
+     console.log(button)
+
   });
 });
 
@@ -130,6 +141,8 @@ minusButtons.forEach((button) => {
   updateCart(button.dataset.productId, -1);
     // Decrease quantity by 1
     updateCartQuantityDisplay(button.dataset.productId);
+    updateTotalPrice();
+    dialog.showModal();
   });
 });
 
@@ -139,6 +152,7 @@ plusButtons.forEach((button) => {
    updateCart(button.dataset.productId, 1);
      // Increase quantity by 1
     updateCartQuantityDisplay(button.dataset.productId);
+    updateTotalPrice()
   });
 });
 
@@ -154,17 +168,21 @@ function updateCart(productId, quantityChange) {
   } else {
     // Find the product in the 'products' array (you'll need this logic)
     const product = products.find(item => item.id === parseInt(productId));
+    const totalPrice = calculateCartTotal(cart);
     cart.push({
       id: product.id,
       name: product.name,
-      quantity: quantityChange // Initialize quantity for new item
+      quantity: quantityChange,
+      priceCent:product.priceCent // Initialize quantity for new item
     });
   }
-  updateCartTotal();
+ 
+
+  updateCartTotalQuantity();
 }
 
 // Update Total Cart Quantity
-function updateCartTotal() {
+function updateCartTotalQuantity() {
   let cartQuantity = 0;
   cart.forEach((item) => {
     cartQuantity += item.quantity;
@@ -173,10 +191,11 @@ function updateCartTotal() {
 }
 
 
+
 function updateCartQuantityDisplay(productId) {
   // Select the quantity display for the specific product 
   const quantityDisplay = document.querySelector(`.display-quantity[data-product-id="${productId}"]`);
-  console.log(quantityDisplay) 
+
 
   if (quantityDisplay) {
     const cartItem = cart.find(item => item.id === parseInt(productId));
@@ -186,42 +205,84 @@ function updateCartQuantityDisplay(productId) {
       quantityDisplay.textContent = '0';
     }
   }
-}
-// Function to update cart item HTML
-function updateCartItem(product) {
-  const cartItem = document.createElement("div");
-  cartItem.classList.add("cart-items");
-  cartItem.innerHTML = 
-    `<div class="first-portion">
-      <p class="food-name">${product.name}</p>
-      <div class="under-portion">
-        <div>
-          <span class="quantity">${product.quantity}x&nbsp;</span> 
-          <span class="price">&nbsp;@$ ${product.priceCent / 100}</span> 
-          <span class="quantity-total">&nbsp;&nbsp;$${(product.quantity * product.priceCent / 100).toFixed(2)}</span>
-        </div>
-      </div>
-    </div>
-    <img src="./assets/images/icon-remove-item.svg" alt="">`
-  ;
-  return cartItem;
+};
+
+function updateTotalPrice() {
+  const totalPrice = calculateCartTotal();
+  document.getElementById('totalPrice').textContent = "$" + totalPrice.toFixed(2);}
+
+function calculateCartTotal() {
+  let totalPrice = 0;
+  cart.forEach(item => {
+    totalPrice += (item.priceCent / 100) * item.quantity; // Calculate total based on quantity
+  });
+  return totalPrice;
 }
 
-function addToCart(button) {
-  const productId = parseInt(button.dataset.productId);
-  const product = products.find(p => p.id === productId);
-  if (product) {
-    product.quantity++;
-    const cartItem = updateCartItem(product);
-    cartItemsContainer.appendChild(cartItem);
-    updateTotalPrice();
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('remove-item')) {
+    const cartItem = event.target.closest('.cart-item'); // Get the closest cart item
+
+    // Get the product ID from the cart item
+    const productId = cartItem.querySelector('.food-name').textContent;
+
+    // Remove the item from the cart array
+    const productIndex = cart.findIndex(item => item.name === productId);
+    if (productIndex !== -1) {
+      cart.splice(productIndex, 1);
+    }
+    updateCartTotalQuantity(); 
+    updateTotalPrice(); 
+    updateCartDisplay(); // Update the entire cart display
+    // Update the total price
+   // Update the total quantity in the cart
   }
-}
-// Function to update total price
-function updateTotalPrice() {
-  let totalPrice = 0;
-  products.forEach(product => {
-    totalPrice += (product.quantity * product.priceCent / 100);
+});
+
+
+
+function updateCartDisplay() {
+  const cartList = document.querySelector('.cart-box');
+  cartList.innerHTML = ''; // Clear existing cart items
+
+  cart.forEach((item) => {
+    let cartItem = document.createElement('div'); // Create a <div> for each cart item
+    cartItem.classList.add('cart-item'); 
+    cartItem.innerHTML = 
+    `
+      <div class="first-portion">
+        <p class="food-name">${item.name}</p>
+        <div class="under-portion">
+          <div>
+            <span class="quantity">${item.quantity}x &nbsp;</span> 
+            <span class="price">&nbsp;@$ ${(item.priceCent / 100).toFixed(2)}</span> 
+            <span class="quantity-total">&nbsp;&nbsp;$${(item.quantity * (item.priceCent / 100)).toFixed(2)}</span>
+          </div>
+        </div>
+      </div>
+      <i class="fa-solid fa-xmark remove-item"></i>
+      `
+    ;
+   
+    cartList.appendChild(cartItem); // Add the cart item to the cart list
   });
-  totalPriceElement.textContent = totalPrice.toFixed(2);
-}
+  const totalPrice = calculateCartTotal();
+  const totalPriceElement = document.getElementById('total-price'); // Assuming you have an element with id 'total-price'
+  totalPriceElement.textContent = "$" + totalPrice.toFixed(2);
+       
+};
+
+const popUp=document.getElementById('popup');
+const openPopUp=document.getElementById('confirm-order');
+const closePopUp=document.getElementById('new-order');
+
+openPopUp.addEventListener('click',()=>{
+  popUp.showModal();
+});
+
+closePopUp.addEventListener('click',()=>{
+  popUp.close();
+})
+
+
+

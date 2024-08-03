@@ -59,7 +59,6 @@ const products = [
         quantity: 0 },
 ];
  
-// ... (your product array 'products' is already defined)
 
 let productsHTML = '';
 
@@ -107,7 +106,7 @@ buttons.forEach((button) => {
     imageElement.style.border="2px solid #c73a0f";
     button.style.color="white";
     button.style.backgroundColor="#c73a0f";
-    button.style.width="65%";
+    button.style.width="80%";
     button.style.display="flex";
     button.style.gap="3rem";
         // Check if the item is already in the cart
@@ -163,10 +162,9 @@ function updateCart(productId, quantityChange) {
   if (productIndex !== -1) {
     cart[productIndex].quantity += quantityChange;
     if (cart[productIndex].quantity < 1) {
-      cart.splice(productIndex, 1); // Remove item if quantity drops below 1
+      cart.splice(productIndex, 1); 
     }
   } else {
-    // Find the product in the 'products' array (you'll need this logic)
     const product = products.find(item => item.id === parseInt(productId));
     const totalPrice = calculateCartTotal(cart);
     cart.push({
@@ -233,9 +231,7 @@ document.addEventListener('click', (event) => {
     }
     updateCartTotalQuantity(); 
     updateTotalPrice(); 
-    updateCartDisplay(); // Update the entire cart display
-    // Update the total price
-   // Update the total quantity in the cart
+    updateCartDisplay();
   }
 });
 
@@ -243,7 +239,7 @@ document.addEventListener('click', (event) => {
 
 function updateCartDisplay() {
   const cartList = document.querySelector('.cart-box');
-  cartList.innerHTML = ''; // Clear existing cart items
+  cartList.innerHTML = ''; 
 
   cart.forEach((item) => {
     let cartItem = document.createElement('div'); // Create a <div> for each cart item
@@ -264,12 +260,11 @@ function updateCartDisplay() {
       `
     ;
    
-    cartList.appendChild(cartItem); // Add the cart item to the cart list
+    cartList.appendChild(cartItem); 
   });
   const totalPrice = calculateCartTotal();
-  const totalPriceElement = document.getElementById('total-price'); // Assuming you have an element with id 'total-price'
-  totalPriceElement.textContent = "$" + totalPrice.toFixed(2);
-       
+  const totalPriceElement = document.getElementById('total-price'); 
+  totalPriceElement.textContent = "$" + totalPrice.toFixed(2);      
 };
 
 const popUp=document.getElementById('popup');
